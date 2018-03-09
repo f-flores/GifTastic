@@ -22,7 +22,13 @@ html body {
   html body button {
     text-align: center; }
   html body #add-topic {
-    background-color: #C17561; }
+    background-color: #C17561;
+    margin-left: 0px; }
+  html body #topic-form {
+    margin-left: 5px; }
+  html body #topic-list {
+    padding-left: 1%;
+    margin-left: 5px; }
   html body #topic-images {
     background-color: #CAE6F2; }
   html body #favorites {

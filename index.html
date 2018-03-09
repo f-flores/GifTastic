@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Trivia Game</title>
+    <title>GifTastic</title>
     <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
@@ -18,6 +18,13 @@
 
     <div class="content row">
       <aside id="add-topic" class="col-xs-12 col-sm-4 col-md-2">
+          <form id="topic-form" class="row">
+            <label for="topic-input">Add Topic</label>
+            <input type="text" id="topic-input"><br>
+        
+              <!-- Button triggers new movie to be added -->
+            <input id="add-topic-btn" type="submit" value="Add Topic">
+          </form>
         Aside topic menu
         <section id="topic-list" class="row"></section>
       </aside>

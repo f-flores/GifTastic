@@ -50,6 +50,16 @@ html {
 
     #add-topic {
       background-color: $game-color-4;
+      margin-left: 0px;
+    }
+
+    #topic-form {
+      margin-left: 5px;
+    }
+
+    #topic-list {
+      padding-left: 1%;
+      margin-left: 5px;
     }
 
     #topic-images {
