@@ -66,7 +66,7 @@
 
       // add gif class, which will later enable toggling still and animated state
       // img-fluid leverages bootstrap 4's image responsiveness
-      img.addClass("gif-image");
+      img.addClass("gif-image img-fluid");
 
       // append to DOM's "#topic-images"
       $("#topic-images").append(img);
