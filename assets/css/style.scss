@@ -56,9 +56,15 @@ html {
     }
 
     .topic-button {
-      background-color: $giphy-color-2;
-      color: white;
+      background-color: $giphy-color-4;
+      font-weight: bold;
+      color: black;
       text-align: center;
+    }
+
+    .topic-button:hover {
+      background-color: $giphy-color-5;
+      color: $giphy-color-6;
     }
 
     button {

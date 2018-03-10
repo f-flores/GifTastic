@@ -16,9 +16,13 @@ html body {
     margin: 0 auto;
     /* Box-model */ }
   html body .topic-button {
-    background-color: #6593A6;
-    color: white;
+    background-color: #BFB8AA;
+    font-weight: bold;
+    color: black;
     text-align: center; }
+  html body .topic-button:hover {
+    background-color: #262220;
+    color: #CAE6F2; }
   html body button {
     text-align: center; }
   html body #add-topic {

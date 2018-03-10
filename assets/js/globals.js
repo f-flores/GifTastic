@@ -54,7 +54,7 @@ function renderButtons() {
     btn = $("<button>");
 
     // Adding a class of topic to button
-    btn.addClass("topic");
+    btn.addClass("topic topic-button mr-2 mb-2");
     // Adding a data-attribute
     btn.attr("data-name", topicsArray[index]);
     // Providing the initial button text
