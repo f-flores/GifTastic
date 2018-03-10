@@ -19,16 +19,16 @@
   </head>
 
   <body>
-    <header>
-      <nav class="row navbar navbar-expand-sm navbar-dark custom-nav-bg">
+    <header class="container-fluid">
+      <nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
 <!--         <div class="row"> -->
-          <a class="navbar-brand col-xs-12 col-sm-2 col-md-4" href="#"><h1 class="custom-h1">Giphy App</h1></a>
+          <a class="navbar-brand col-xs-12 col-sm-3 offset-md-1 col-md-3" href="#"><h1 class="display-5">Giphy App</h1></a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse col-sm-10 col-md-8" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse col-xs-12 col-sm-9 col-md-8" id="navbarSupportedContent">
             <form id="topic-form" class="form-inline">
               <label for="topic-input"></label>
               <input id="topic-input" class="form-control mr-sm-2" type="text" placeholder="Topic..." aria-label="Add Topic">
@@ -43,19 +43,26 @@
     </header>
 
     <div class="content row">
-      <aside id="add-topic" class="col-xs-12 col-sm-3 col-md-2">
-        <h3 class="text-center">Topic List</h3>
+      <aside id="add-topic" class="col-xs-12 col-sm-4 col-md-2">
+          <form id="topic-form" class="row">
+            <label for="topic-input">Add Topic</label>
+            <input type="text" id="topic-input"><br>
+        
+              <!-- Button triggers new movie to be added -->
+            <input id="add-topic-btn" type="submit" value="Add Topic">
+          </form>
+        Aside topic menu
         <section id="topic-list" class="row"></section>
       </aside>
   
-      <section class="col-xs-12 col-sm-6 col-md-8">
+      <section class="col-xs-12 col-sm-6 col-md-7">
         <section id="topic-images">
           Images will go here...
         </section>
       </section>
 
-      <aside id="favorites" class="col-xs-12 col-sm-3 col-md-2">
-        <h3 class="text-center">Favorites</h3>
+      <aside id="favorites" class="col-xs-12 col-sm-2 col-md-3">
+        Favorites Section
       </aside>
 
 

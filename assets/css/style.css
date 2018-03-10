@@ -4,17 +4,17 @@
 
 html body {
   /* background image credit: https://media1.giphy.com/media/TxVVB6PfWMjE4/giphy.gif */
-  background-color: #5C8E8A;
-  background-size: 100% 125%;
-  height: 100%; }
+  background-color: #F2EDDC;
+  height: 100%;
+  width: 99%; }
+  html body .custom-nav-bg {
+    background-color: #262220; }
   html body .custom-h1 {
     font-family: "Acme", sans-serif;
-    padding: 2% 2%;
+    font-size: 140%;
     /* Positioning */
     margin: 0 auto;
-    /* Box-model */
-    width: 85%;
-    border: 2px 2px solid black; }
+    /* Box-model */ }
   html body .trivia-button {
     background-color: blue;
     color: white;
@@ -22,14 +22,20 @@ html body {
   html body button {
     text-align: center; }
   html body #add-topic {
-    background-color: #C17561;
-    margin-left: 0px; }
+    background-color: #3D5E73;
+    margin-left: 0px;
+    min-height: 100vh; }
   html body #topic-form {
     margin-left: 5px; }
   html body #topic-list {
-    padding-left: 1%;
-    margin-left: 5px; }
+    padding-left: 3%;
+    margin-left: 15px; }
   html body #topic-images {
-    background-color: #CAE6F2; }
+    background-color: #F2EDDC; }
   html body #favorites {
-    background-color: #DBB542; }
+    background-color: #BFB8AA;
+    min-height: 100vh; }
+
+@media only screen and (min-width: 768px) {
+  .custom-h1 {
+    font-size: 210% !important; } }

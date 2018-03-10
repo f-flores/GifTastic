@@ -1,16 +1,25 @@
 /* stylesheet */
 
 // game font family
-$trivia-font: 'Acme', sans-serif;
+$giphyapp-font: 'Acme', sans-serif;
 
 // color theme for star wars game
 $game-bg-color: beige;
-$game-color-1: #5C8E8A;
-$game-color-2: #F0F3F0;
-$game-color-3: #DBB542;
-$game-color-4: #C17561;
-$game-color-5: #5B5B59;
-$game-color-6: #CAE6F2;
+$giphy-color-1: #3D5E73;
+$giphy-color-2: #6593A6;
+$giphy-color-3: #F2EDDC;
+$giphy-color-4: #BFB8AA;
+$giphy-color-5: #262220;
+$giphy-color-6: #CAE6F2;
+
+//------------------------------------------------------------------
+// DIMENSIONS DEPENDING ON MEDIA
+// size values depending on media
+
+
+// smartphone (smph) landscape dimensions
+$smph-size: 768;
+$px-smph-size: $smph-size * 1px;
 
 
 * {
@@ -21,21 +30,29 @@ html {
 
   body {
     /* background image credit: https://media1.giphy.com/media/TxVVB6PfWMjE4/giphy.gif */
-    background-color: $game-color-1;
-    // background: $game-color-3 url("../images/rainbow-1418706_960_720.png") no-repeat;
-    background-size: 100% 125%;
+    background-color: $giphy-color-3;
+    // background: $giphy-color-3 url("../images/rainbow-1418706_960_720.png") no-repeat;
+    // background-size: 100% 125%;
     height: 100%;
+    width: 99%;
+
+    .custom-nav-bg {
+
+      background-color: $giphy-color-5;
+    }
+
     .custom-h1 {
-      font-family: $trivia-font;
-      padding: 2% 2%;
-      // color: $game-color-2;
+      font-family: $giphyapp-font;
+      // padding: 2% 2%;
+      // color: $giphy-color-2;
+      font-size: 140%;
 
       /* Positioning */
       margin: 0 auto;
 
       /* Box-model */
-      width: 85%;
-      border: 2px 2px solid black;
+      // width: 85%;
+      // border: 2px 2px solid black;
     }
 
     .trivia-button {
@@ -49,8 +66,9 @@ html {
     }
 
     #add-topic {
-      background-color: $game-color-4;
+      background-color: $giphy-color-1;
       margin-left: 0px;
+      min-height: 100vh;
     }
 
     #topic-form {
@@ -58,18 +76,28 @@ html {
     }
 
     #topic-list {
-      padding-left: 1%;
-      margin-left: 5px;
+      padding-left: 3%;
+      margin-left: 15px;
     }
 
     #topic-images {
-      background-color: $game-color-6;
+      background-color: $giphy-color-3;
     }
 
     #favorites {
-      background-color: $game-color-3;
+      background-color: $giphy-color-4;
+      min-height: 100vh;
     }
 
   }
 
+}
+
+
+//---------------------------------------------------------------------
+// FONT SIZE for custom-h1 on breakpoint tablet landscape
+@media only screen and (min-width: $px-smph-size) {
+  .custom-h1 {
+    font-size: 210% !important;
+  }
 }
