@@ -15,8 +15,8 @@ html body {
     /* Positioning */
     margin: 0 auto;
     /* Box-model */ }
-  html body .trivia-button {
-    background-color: blue;
+  html body .topic-button {
+    background-color: #6593A6;
     color: white;
     text-align: center; }
   html body button {
