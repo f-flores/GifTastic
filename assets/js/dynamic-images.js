@@ -57,20 +57,20 @@
       console.log("Title: " + data[index].title);
 
       // add src and alt attributes to image, and custom attribute img-state
-      img.attr("src", data[index].images.original_still.url);
+      img.attr("src", data[index].images.fixed_height_still.url);
       img.attr("alt", data[index].title);
       img.attr("img-state", "still");
 
       // add data-still and data-animate attributes to store respective image urls
-      img.attr("data-still", data[index].images.original_still.url);
-      img.attr("data-animate", data[index].images.original.url);
+      img.attr("data-still", data[index].images.fixed_height_still.url);
+      img.attr("data-animate", data[index].images.fixed_height.url);
 
       // add gif class, which will later enable toggling still and animated state
       // img-fluid leverages bootstrap 4's image responsiveness
       img.addClass("gif-image img-fluid");
 
       // set figImg width to img width so img does not have to take up whole row
-      figImg.attr("width", data[index].images.original_still.width);
+      figImg.attr("width", data[index].images.fixed_height_still.width);
 
       // add caption to image
       switch (data[index].rating) {
