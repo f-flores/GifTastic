@@ -2,6 +2,7 @@
 
 // game font family
 $giphyapp-font: 'Acme', sans-serif;
+$giphyapp-font-body: 'Roboto Slab', serif;
 
 // color theme for star wars game
 $game-bg-color: beige;
@@ -11,6 +12,14 @@ $giphy-color-3: #F2EDDC;
 $giphy-color-4: #BFB8AA;
 $giphy-color-5: #262220;
 $giphy-color-6: #CAE6F2;
+$giphy-color-7: #5B111F;
+$giphy-color-8: #E0C5CA;
+
+$giphy-tbutton-s: #CEDCE7;
+$giphy-tbutton-e: #596a72;
+$giphy-tbutton-txt: #09113a;
+$giphy-tbutton-hv-s: #acc4d6;
+$giphy-tbutton-hv-e: #434f55;
 
 //------------------------------------------------------------------
 // DIMENSIONS DEPENDING ON MEDIA
@@ -29,41 +38,74 @@ $px-smph-size: $smph-size * 1px;
 html {
 
   body {
-    /* background image credit: https://media1.giphy.com/media/TxVVB6PfWMjE4/giphy.gif */
     background-color: $giphy-color-3;
     // background: $giphy-color-3 url("../images/rainbow-1418706_960_720.png") no-repeat;
-    // background-size: 100% 125%;
     height: 100%;
     width: 99%;
 
-    .custom-nav-bg {
+    .custom-gradient {
+      background: yellow;
+      background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
+      background: -o-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
+      background: -moz-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
+      background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
+      background-clip: content-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 2.5vw;
+      // text-shadow: 0.5px 0.5px white;
+    }
 
-      background-color: $giphy-color-5;
+    .custom-nav-bg {
+      background: linear-gradient(to right, $giphy-color-5, $giphy-color-7);
     }
 
     .custom-h1 {
       font-family: $giphyapp-font;
-      // padding: 2% 2%;
-      // color: $giphy-color-2;
       font-size: 140%;
 
       /* Positioning */
       margin: 0 auto;
+    }
+
+    .custom-h3 {
+      font-family: $giphyapp-font-body;
+     // font-size: 100%;
+
+      /* box model */
+      width: 100%;
+      padding: 10px;
+
+      /* Positioning */
+      margin: 0 auto;
+    }
+
+    .topic-list {
+      // padding-left: 3%;
 
       /* Box-model */
-      // width: 85%;
-      // border: 2px 2px solid black;
+      margin: 0 auto;
+      max-width: 100%;
+      border: 1px 1px solid black;
     }
 
     .topic-button {
-      background-color: $giphy-color-4;
+      // background-color: $giphy-color-4;
+      background: linear-gradient(to right, $giphy-tbutton-s, $giphy-tbutton-e);
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 4px;
+      border-radius: 15px;
+
       font-weight: bold;
-      color: black;
+      color: $giphy-tbutton-txt;
       text-align: center;
+
     }
 
     .topic-button:hover {
-      background-color: $giphy-color-5;
+      background: linear-gradient(to right, $giphy-tbutton-hv-s, $giphy-tbutton-hv-e);
       color: $giphy-color-6;
     }
 
@@ -72,7 +114,7 @@ html {
     }
 
     #add-topic {
-      background-color: $giphy-color-1;
+      background: linear-gradient(to right, $giphy-color-1, $giphy-color-2);
       margin-left: 0px;
       min-height: 100vh;
     }
@@ -81,17 +123,13 @@ html {
       margin-left: 5px;
     }
 
-    #topic-list {
-      padding-left: 3%;
-      margin-left: 15px;
-    }
-
     #topic-images {
       background-color: $giphy-color-3;
     }
 
     #favorites {
-      background-color: $giphy-color-4;
+      // background-color: $giphy-color-4;
+      background: linear-gradient(to right, $giphy-color-4, $giphy-color-2);
       min-height: 100vh;
     }
 

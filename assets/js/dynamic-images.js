@@ -106,14 +106,20 @@
     // grabs the input from the topic textbox
     currentTopic = $("#topic-input").val().trim();
 
-    // The topic from the textbox input is added to array
-    topicsList.push(currentTopic);
-    // Adding new topic to local storage
-    localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
+    // make sure something is entered
+    if (currentTopic !== "") {
+      // The topic from the textbox input is added to array
+      topicsList.push(currentTopic);
 
-    // call to insertButtons to process topics list buttons
-    insertButtons();
+      // Adding new topic to local storage
+      localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
 
+      // call to insertButtons to process topics list buttons
+      insertButtons();
+    }
+
+    // clear input field
+    $("#topic-input").val("");
   });
 
 

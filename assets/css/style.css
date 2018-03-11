@@ -3,41 +3,63 @@
   box-sizing: border-box; }
 
 html body {
-  /* background image credit: https://media1.giphy.com/media/TxVVB6PfWMjE4/giphy.gif */
   background-color: #F2EDDC;
   height: 100%;
   width: 99%; }
+  html body .custom-gradient {
+    background: yellow;
+    background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
+    background: -o-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
+    background: -moz-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
+    background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5vw; }
   html body .custom-nav-bg {
-    background-color: #262220; }
+    background: linear-gradient(to right, #262220, #5B111F); }
   html body .custom-h1 {
     font-family: "Acme", sans-serif;
     font-size: 140%;
     /* Positioning */
+    margin: 0 auto; }
+  html body .custom-h3 {
+    font-family: "Roboto Slab", serif;
+    /* box model */
+    width: 100%;
+    padding: 10px;
+    /* Positioning */
+    margin: 0 auto; }
+  html body .topic-list {
+    /* Box-model */
     margin: 0 auto;
-    /* Box-model */ }
+    max-width: 100%;
+    border: 1px 1px solid black; }
   html body .topic-button {
-    background-color: #BFB8AA;
+    background: linear-gradient(to right, #CEDCE7, #596a72);
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 4px;
+    border-radius: 15px;
     font-weight: bold;
-    color: black;
+    color: #09113a;
     text-align: center; }
   html body .topic-button:hover {
-    background-color: #262220;
+    background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
   html body button {
     text-align: center; }
   html body #add-topic {
-    background-color: #3D5E73;
+    background: linear-gradient(to right, #3D5E73, #6593A6);
     margin-left: 0px;
     min-height: 100vh; }
   html body #topic-form {
     margin-left: 5px; }
-  html body #topic-list {
-    padding-left: 3%;
-    margin-left: 15px; }
   html body #topic-images {
     background-color: #F2EDDC; }
   html body #favorites {
-    background-color: #BFB8AA;
+    background: linear-gradient(to right, #BFB8AA, #6593A6);
     min-height: 100vh; }
 
 @media only screen and (min-width: 768px) {

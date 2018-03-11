@@ -15,8 +15,11 @@ const GIPHYLIMIT = 10,
 
 // grabs the localStorage object in the *global* topicsList 'array' in parsed format
 var topicsList = JSON.parse(localStorage.getItem("gifTasticTopics")),
-    favList = JSON.parse(localStorage.getItem("gifTasticFavorites")),
-    topicsArray = ["cat","dog","dolphin","hamster","hen","parakeet"];
+    favList = JSON.parse(localStorage.getItem("gifTasticFavorites"));
+
+// var    topicsArray = ["cat","dog","dolphin","hamster","hen","parakeet"];
+
+//  localStorage.clear();
 
 // -------------------------------------------------------------------------------------
 // checkLocalStorage() checks if gifTasticTopics and gifTasticFavorites exist
@@ -37,11 +40,11 @@ function insertButtons() {
   // rtTopicList is a variable that represents the realtime topic image list within
   // the running GifTastic app
   var rtTopicList = JSON.parse(localStorage.getItem("gifTasticTopics")),
-      gifTopic,
+   //   gifTopic,
       tBtn;
 
   // clear prior topics list
-  $("#topic-list").empty();
+  $(".topic-list").empty();
 
   // if no elements are present in rtImageList, it means that the localStorage object
   // gifTasticTopics is empty, so an empty array will be declared
@@ -51,7 +54,7 @@ function insertButtons() {
 
   console.log("in insertButtons()");
   // make the gif buttons
-  for (gifTopic of rtTopicList) {
+  for (const gifTopic of rtTopicList) {
     console.log("current value: " + gifTopic);
     // Dynamically create button for each topic
     tBtn = $("<button>");
@@ -60,10 +63,10 @@ function insertButtons() {
     tBtn.addClass("topic topic-button mr-2 mb-2");
     // Adding a data-attribute
     tBtn.attr("data-name", gifTopic);
-    // Providing the initial button text
+    // Providing the button text
     tBtn.text(gifTopic);
     // Adding the button to the buttons-view div
-    $("#topic-list").append(tBtn);
+    $(".topic-list").append(tBtn);
   }
 }
 

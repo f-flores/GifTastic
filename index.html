@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GifTastic</title>
-    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Acme|Roboto+Slab" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- jQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -32,11 +32,11 @@
             <form id="topic-form" class="form-inline">
               <label for="topic-input"></label>
               <input id="topic-input" class="form-control mr-sm-2" type="text" placeholder="Topic..." aria-label="Add Topic">
-              <button id="add-topic-btn" class="btn btn-outline-success my-2 my-sm-0 mr-2" type="submit" value="Add topic">Add topic</button>
+              <button id="add-topic-btn" class="btn btn-outline-warning my-2 my-sm-0 mr-2" type="submit" value="Add topic">Add topic</button>
             </form>
 
             <!-- Small modal -->
-            <button type="button" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target=".bd-my-instr-sm">Instructions</button>
+            <button type="button" class="btn btn-outline-warning my-2 my-sm-0" data-toggle="modal" data-target=".bd-my-instr-sm">Instructions</button>
           </div>
 <!--         </div> -->
       </nav>
@@ -44,8 +44,8 @@
 
     <div class="content row">
       <aside id="add-topic" class="col-xs-12 col-sm-3 col-md-2">
-        <h3 class="text-center">Topic List</h3>
-        <section id="topic-list" class="row"></section>
+        <h3 class="text-center custom-gradient custom-h3">Topic List</h3>
+        <section class="topic-list row"></section>
       </aside>
   
       <section class="col-xs-12 col-sm-6 col-md-8">
@@ -55,7 +55,7 @@
       </section>
 
       <aside id="favorites" class="col-xs-12 col-sm-3 col-md-2">
-        <h3 class="text-center">Favorites</h3>
+        <h3 class="text-center custom-gradient custom-h3">Favorites</h3>
         <div id="favorites-list"></div>
       </aside>
 
