@@ -7,15 +7,8 @@ html body {
   height: 100%;
   width: 99%; }
   html body .custom-gradient {
-    background: yellow;
-    background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
-    background: -o-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
-    background: -moz-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
-    background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
-    background-clip: content-box;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 2.5vw; }
+    color: #09113a;
+    font-size: 6vw; }
   html body .custom-nav-bg {
     background: linear-gradient(to right, #262220, #5B111F); }
   html body .custom-h1 {
@@ -25,6 +18,8 @@ html body {
     margin: 0 auto; }
   html body .custom-h3 {
     font-family: "Roboto Slab", serif;
+    font-size: 170%;
+    text-shadow: 1px 1px #F2EDDC;
     /* box model */
     width: 100%;
     padding: 10px;
@@ -48,20 +43,49 @@ html body {
   html body .topic-button:hover {
     background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
+  html body figure {
+    float: left;
+    margin: 10px 10px; }
+    html body figure figcaption {
+      font-size: 80%; }
+      html body figure figcaption .rated-g {
+        background: green;
+        color: white;
+        padding: 3px;
+        border-radius: 5px; }
+      html body figure figcaption .rated-pg {
+        background: goldenrod;
+        color: black;
+        padding: 3px;
+        border-radius: 5px; }
   html body button {
     text-align: center; }
   html body #add-topic {
     background: linear-gradient(to right, #3D5E73, #6593A6);
-    margin-left: 0px;
-    min-height: 100vh; }
+    margin-left: 0px; }
   html body #topic-form {
     margin-left: 5px; }
   html body #topic-images {
     background-color: #F2EDDC; }
   html body #favorites {
-    background: linear-gradient(to right, #BFB8AA, #6593A6);
-    min-height: 100vh; }
+    background: linear-gradient(to right, #FFC107, #5B111F); }
 
 @media only screen and (min-width: 768px) {
-  .custom-h1 {
-    font-size: 210% !important; } }
+  html body .custom-h1 {
+    font-size: 210% !important; }
+  html body .custom-h3 {
+    text-shadow: none; }
+  html body .custom-gradient {
+    background: yellow;
+    background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
+    background: -o-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
+    background: -moz-linear-gradient(right, cyan, #d6d0f3, whitesmoke);
+    background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5vw !important; }
+  html body #add-topic {
+    min-height: 100vh; }
+  html body #favorites {
+    min-height: 100vh; } }

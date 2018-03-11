@@ -14,6 +14,7 @@ $giphy-color-5: #262220;
 $giphy-color-6: #CAE6F2;
 $giphy-color-7: #5B111F;
 $giphy-color-8: #E0C5CA;
+$giphy-fav-section: #FFC107;
 
 $giphy-tbutton-s: #CEDCE7;
 $giphy-tbutton-e: #596a72;
@@ -44,15 +45,8 @@ html {
     width: 99%;
 
     .custom-gradient {
-      background: yellow;
-      background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
-      background: -o-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
-      background: -moz-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
-      background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
-      background-clip: content-box;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 2.5vw;
+      color: $giphy-tbutton-txt;
+      font-size: 6vw;
       // text-shadow: 0.5px 0.5px white;
     }
 
@@ -70,7 +64,8 @@ html {
 
     .custom-h3 {
       font-family: $giphyapp-font-body;
-     // font-size: 100%;
+      font-size: 170%;
+      text-shadow: 1px 1px $giphy-color-3;
 
       /* box model */
       width: 100%;
@@ -109,6 +104,31 @@ html {
       color: $giphy-color-6;
     }
 
+    figure {
+      // width: 100px;
+      float: left;
+      margin: 10px 10px;
+
+      figcaption {
+        font-size: 80%;
+        // width: 100px;
+
+        .rated-g {
+          background: green;
+          color: white;
+          padding: 3px;
+          border-radius: 5px;
+        }
+
+        .rated-pg {
+          background: goldenrod;
+          color: black;
+          padding: 3px;
+          border-radius: 5px;
+        }
+      }
+    }
+
     button {
       text-align: center;
     }
@@ -116,7 +136,7 @@ html {
     #add-topic {
       background: linear-gradient(to right, $giphy-color-1, $giphy-color-2);
       margin-left: 0px;
-      min-height: 100vh;
+      // max-height: 100vh;
     }
 
     #topic-form {
@@ -128,9 +148,8 @@ html {
     }
 
     #favorites {
-      // background-color: $giphy-color-4;
-      background: linear-gradient(to right, $giphy-color-4, $giphy-color-2);
-      min-height: 100vh;
+      background: linear-gradient(to right, $giphy-fav-section, $giphy-color-7);
+      // max-height: 100vh;
     }
 
   }
@@ -141,7 +160,36 @@ html {
 //---------------------------------------------------------------------
 // FONT SIZE for custom-h1 on breakpoint tablet landscape
 @media only screen and (min-width: $px-smph-size) {
-  .custom-h1 {
-    font-size: 210% !important;
+  html {
+    body {
+      .custom-h1 {
+        font-size: 210% !important;
+      }
+
+      .custom-h3 {
+        text-shadow: none;
+      }
+
+      .custom-gradient {
+        background: yellow;
+        background: -webkit-linear-gradient(left, cyan, #d6d0f3, whitesmoke);
+        background: -o-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
+        background: -moz-linear-gradient(right,  cyan, #d6d0f3, whitesmoke);
+        background: linear-gradient(to right, cyan, #d6d0f3, whitesmoke);
+        background-clip: content-box;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 2.5vw !important;
+      }
+
+      #add-topic {
+        min-height: 100vh;
+      }
+
+      #favorites {
+        min-height: 100vh;
+      }
+
+    }
   }
 }

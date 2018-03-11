@@ -10,16 +10,11 @@
 
 
  $(document).ready(() => {
- // const QuestionMaxTime = 30,
- //       AnswerShow = 8,
- //       BeginWait = 1.5;
   console.log("in document ready");
 
   // --------------------------------------------------------------------------------------
-  // $(".gif").on("click"..) enables the pausing-gifs effect. It toggles between a "still"
-  // and "animated" data-state.
+  // pauseImgEffect() toggles between "still" and "animate" data-states
   //
-  // $(".gif-image").on("click", () => {
   function pauseImgEffect() {
     var animatedURL = $(this).attr("data-animate"),
         stillURL = $(this).attr("data-still"),
@@ -40,13 +35,14 @@
       $(this).attr("img-state", "still");
     }
   }
-//  });
 
   // --------------------------------------------------------------------------------------
   // renderImgs appends the topic related imgs to the dom
   //
   function renderImgs(data) {
-    var img,
+    var figImg,
+        figCap,
+        img,
         index;
 
     // clear page of prior images
@@ -55,6 +51,8 @@
     console.log("in renderImgs() -- data: " + data);
     for (index = 0; index < data.length; index++) {
       // create img tag
+      figImg = $("<figure>");
+      figCap = $("<figcaption>");
       img = $("<img>");
       console.log("Title: " + data[index].title);
 
@@ -71,8 +69,25 @@
       // img-fluid leverages bootstrap 4's image responsiveness
       img.addClass("gif-image img-fluid");
 
+      // set figImg width to img width so img does not have to take up whole row
+      figImg.attr("width", data[index].images.original_still.width);
+
+      // add caption to image
+      switch (data[index].rating) {
+        case "g":
+          figCap.html("<span class=\"rated-g\">Rating: " + data[index].rating + "</span>");
+          break;
+        case "pg":
+          figCap.html("<span class=\"rated-pg\">Rating: " + data[index].rating + "</span>");
+          break;
+        default:
+          break;
+      }
+      figImg.append(img);
+      figImg.append(figCap);
+
       // append to DOM's "#topic-images"
-      $("#topic-images").append(img);
+      $("#topic-images").append(figImg);
     }
   }
 
@@ -124,6 +139,9 @@
 
 
   $(document).on("click", ".topic", displayTopicImgs);
+
+  // $(".gif-image").on("click"..) enables the pausing-gifs effect. It toggles between a "still"
+  // and "animated" data-state.
   $(document).on("click", ".gif-image", pauseImgEffect);
 
 });

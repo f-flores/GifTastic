@@ -11,13 +11,11 @@
 const GIPHYLIMIT = 10,
       GIPHYKEY = "zOxVha9Ha82FHhEMPSbIBvoOOApcLrBK",
       GIPHYURL = "https://api.giphy.com/v1/gifs/search?api_key=" + GIPHYKEY + "&q=",
-      GIPHYSUFFIX = "&limit=" + GIPHYLIMIT.toString() + "&offset=0&rating=G&lang=en";
+      GIPHYSUFFIX = "&limit=" + GIPHYLIMIT.toString() + "&offset=0&rating=PG&lang=en";
 
 // grabs the localStorage object in the *global* topicsList 'array' in parsed format
 var topicsList = JSON.parse(localStorage.getItem("gifTasticTopics")),
     favList = JSON.parse(localStorage.getItem("gifTasticFavorites"));
-
-// var    topicsArray = ["cat","dog","dolphin","hamster","hen","parakeet"];
 
 //  localStorage.clear();
 
