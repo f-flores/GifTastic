@@ -14,7 +14,7 @@ const GIPHYLIMIT = 10,
       GIPHYSUFFIX = "&limit=" + GIPHYLIMIT.toString() + "&offset=0&rating=G&lang=en";
 
 // grabs the localStorage object in the *global* topicsList 'array' in parsed format
-var topicsList = JSON.parse(localStorage.getItem("giftasticTopics")),
+var topicsList = JSON.parse(localStorage.getItem("gifTasticTopics")),
     favList = JSON.parse(localStorage.getItem("gifTasticFavorites")),
     topicsArray = ["cat","dog","dolphin","hamster","hen","parakeet"];
 
@@ -27,43 +27,45 @@ function checkLocalStorage() {
     topicsList = [];
   }
   if (!Array.isArray(favList)) {
-    topicsList = [];
+    favList = [];
   }
 }
 
 // -------------------------------------------------------------------------------------
-// insertImages() places images stored in localStorage array in DOM.
-function insertImages() {
-  console.log("in InsertImages()");
-}
+// insertButtons() places images stored in localStorage array in DOM.
+function insertButtons() {
+  // rtTopicList is a variable that represents the realtime topic image list within
+  // the running GifTastic app
+  var rtTopicList = JSON.parse(localStorage.getItem("gifTasticTopics")),
+      gifTopic,
+      tBtn;
 
-
-// Function for displaying topic data
-function renderButtons() {
-  var index,
-      btn;
-
-  // Deleting the buttons prior to adding new topics
-  // so we don't have repeat buttons
+  // clear prior topics list
   $("#topic-list").empty();
 
-  // Looping through the array of movies
-  for (index = 0; index < topicsArray.length; index++) {
+  // if no elements are present in rtImageList, it means that the localStorage object
+  // gifTasticTopics is empty, so an empty array will be declared
+  if (!Array.isArray(rtTopicList)) {
+    rtTopicList = [];
+  }
 
+  console.log("in insertButtons()");
+  // make the gif buttons
+  for (gifTopic of rtTopicList) {
+    console.log("current value: " + gifTopic);
     // Dynamically create button for each topic
-    btn = $("<button>");
+    tBtn = $("<button>");
 
     // Adding a class of topic to button
-    btn.addClass("topic topic-button mr-2 mb-2");
+    tBtn.addClass("topic topic-button mr-2 mb-2");
     // Adding a data-attribute
-    btn.attr("data-name", topicsArray[index]);
+    tBtn.attr("data-name", gifTopic);
     // Providing the initial button text
-    btn.text(topicsArray[index]);
+    tBtn.text(gifTopic);
     // Adding the button to the buttons-view div
-    $("#topic-list").append(btn);
+    $("#topic-list").append(tBtn);
   }
 }
 
 checkLocalStorage();
-insertImages();
-renderButtons();
+insertButtons();

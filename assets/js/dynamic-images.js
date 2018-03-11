@@ -49,6 +49,9 @@
     var img,
         index;
 
+    // clear page of prior images
+    $("#topic-images").empty();
+
     console.log("in renderImgs() -- data: " + data);
     for (index = 0; index < data.length; index++) {
       // create img tag
@@ -75,15 +78,6 @@
 
   // Function for dumping the JSON content for each button into the div
   function displayTopicImgs() {
-    // YOUR CODE GOES HERE!!! HINT: You will need to create a new div to hold the JSON.
-    // $("#current-movie").remove(); // remove div current-movie
-
-    // var movieDiv = $("<div>");
-    // movieDiv.attr("id","current-movie");
-    // GIPHYLIMIT = 10,
-    //  GIPHYKEY = "zOxVha9Ha82FHhEMPSbIBvoOOApcLrBK",
-    //  GIPHYURL = "https://api.giphy.com/v1/gifs/search?" + GIPHYKEY;
-    //  GIPHYSUFFIX = "&limit=" + GIPHYLIMIT.toString() + "&offset=0&rating=G&lang=en";
     var topicName = $(this).attr("data-name"),
         queryURL = GIPHYURL + topicName + GIPHYSUFFIX,
         result;
@@ -113,12 +107,15 @@
     currentTopic = $("#topic-input").val().trim();
 
     // The topic from the textbox input is added to array
-    topicsArray.push(currentTopic);
+    topicsList.push(currentTopic);
+    // Adding new topic to local storage
+    localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
 
-    // call to renderButtons handles topicsArray
-    renderButtons();
+    // call to insertButtons to process topics list buttons
+    insertButtons();
 
   });
+
 
   $(document).on("click", ".topic", displayTopicImgs);
   $(document).on("click", ".gif-image", pauseImgEffect);
