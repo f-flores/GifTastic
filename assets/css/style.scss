@@ -96,12 +96,29 @@ html {
       font-weight: bold;
       color: $giphy-tbutton-txt;
       text-align: center;
-
     }
 
     .topic-button:hover {
       background: linear-gradient(to right, $giphy-tbutton-hv-s, $giphy-tbutton-hv-e);
       color: $giphy-color-6;
+    }
+
+    .clear-button {
+      background: linear-gradient(to right, red, pink);
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 4px;
+      border-radius: 15px;
+
+      font-weight: bold;
+      color: brown;
+      text-align: center;
+    }
+
+    .clear-button:hover {
+      background: linear-gradient(to right, #b70135, #c4355d);
+      color: black;
     }
 
     figure {
@@ -153,6 +170,8 @@ html {
       background: linear-gradient(to right, $giphy-fav-section, $giphy-color-7);
       // max-height: 100vh;
     }
+
+
 
   }
 

@@ -148,10 +148,11 @@
     event.preventDefault();
 
     // grabs the input from the topic textbox
-    currentTopic = $("#topic-input").val().trim();
+    currentTopic = $("#topic-input").val().
+                    trim();
 
-    // make sure something is entered
-    if (currentTopic !== "") {
+    // make sure something is entered and not repeat iteam
+    if (currentTopic !== "" && topicsList.indexOf(currentTopic) === -1) {
       // The topic from the textbox input is added to array
       topicsList.push(currentTopic);
 
@@ -176,5 +177,23 @@
   // $(".gif-image").on("click"..) enables the pausing-gifs effect. It toggles between a "still"
   // and "animated" data-state.
   $(document).on("click", ".gif-image", pauseImgEffect);
+
+  // clears topic buttons
+  $(document).on("click", ".clear-button", () => {
+    var index;
+
+    localStorage.clear();
+    localStorage.removeItem("gifTasticTopics");
+
+    // manually remove elements from topicsList array
+    while (topicsList.length >= 1) {
+      topicsList.pop();
+    }
+    // localStorage.clear();
+    localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
+    $(".topic-list").empty();
+    checkLocalStorage();
+    insertButtons();
+  });
 
 });

@@ -42,7 +42,7 @@ function insertButtons() {
   // rtTopicList is a variable that represents the realtime topic image list within
   // the running GifTastic app
   var rtTopicList = JSON.parse(localStorage.getItem("gifTasticTopics")),
-   //   gifTopic,
+      clearBtn = $("<button>"),
       tBtn;
 
   // clear prior topics list
@@ -55,10 +55,14 @@ function insertButtons() {
   }
 
   console.log("in insertButtons()");
+  clearBtn.addClass("clear-button");
+ // clearBtn.addClass("delete-topics");
+  clearBtn.text("Clear All Topics");
   // make the gif buttons
   for (const gifTopic of rtTopicList) {
     console.log("current value: " + gifTopic);
     // Dynamically create button for each topic
+    // var xBtn = $("<button class='delete'>").text(&amp;times;).attr("data-index", gifTopic);
     tBtn = $("<button>");
 
     // Adding an id attribute
@@ -78,9 +82,11 @@ function insertButtons() {
     console.log("click-count for " + gifTopic + " is: " + topicsClickCounts[gifTopic]);
 
     // Providing the button text
+    // $(".topic-list").prepend(xBtn);
     tBtn.text(gifTopic);
-    // Adding the button to the buttons-view div
+    // Adding the button to topic-list section
     $(".topic-list").append(tBtn);
+    $(".topic-list").append(clearBtn);
   }
 }
 

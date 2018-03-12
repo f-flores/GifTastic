@@ -43,6 +43,19 @@ html body {
   html body .topic-button:hover {
     background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
+  html body .clear-button {
+    background: linear-gradient(to right, red, pink);
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 4px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: brown;
+    text-align: center; }
+  html body .clear-button:hover {
+    background: linear-gradient(to right, #b70135, #c4355d);
+    color: black; }
   html body figure {
     float: left;
     margin: 10px 10px; }
