@@ -95,7 +95,7 @@
           figCap.html("<span class=\"rated-pg\">Rating: " + data[index].rating + "</span>");
           break;
         default:
-          figCap.html("<span class=\"rated-none\">No Rating</span>");
+          figCap.html("<span class=\"rated-none\">Rating: " + data[index].rating + "</span>");
           break;
       }
       figImg.append(img);
@@ -180,9 +180,6 @@
 
   // clears topic buttons
   $(document).on("click", ".clear-button", () => {
-    var index;
-
-    localStorage.clear();
     localStorage.removeItem("gifTasticTopics");
 
     // manually remove elements from topicsList array
