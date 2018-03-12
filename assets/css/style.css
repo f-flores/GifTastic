@@ -47,17 +47,18 @@ html body {
     float: left;
     margin: 10px 10px; }
     html body figure figcaption {
-      font-size: 80%; }
+      font-size: 80%;
+      padding: 3px;
+      border-radius: 5px; }
       html body figure figcaption .rated-g {
         background: green;
-        color: white;
-        padding: 3px;
-        border-radius: 5px; }
+        color: white; }
       html body figure figcaption .rated-pg {
         background: goldenrod;
-        color: black;
-        padding: 3px;
-        border-radius: 5px; }
+        color: black; }
+      html body figure figcaption .rated-none {
+        background: black;
+        color: white; }
   html body button {
     text-align: center; }
   html body #add-topic {

@@ -111,20 +111,22 @@ html {
 
       figcaption {
         font-size: 80%;
-        // width: 100px;
+        padding: 3px;
+        border-radius: 5px;
 
         .rated-g {
           background: green;
           color: white;
-          padding: 3px;
-          border-radius: 5px;
         }
 
         .rated-pg {
           background: goldenrod;
           color: black;
-          padding: 3px;
-          border-radius: 5px;
+        }
+
+        .rated-none {
+          background: black;
+          color: white;
         }
       }
     }

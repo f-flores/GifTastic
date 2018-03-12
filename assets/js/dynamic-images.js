@@ -13,6 +13,18 @@
   console.log("in document ready");
 
   // --------------------------------------------------------------------------------------
+  // resetOtherClickCounts() sets unclicked topic names' click count back to zero
+  //
+  function resetOtherClickCounts(tName) {
+    for (const gifTopic of topicsList) {
+      if (gifTopic !== tName) {
+        topicsClickCounts[gifTopic] = 0;
+        $("#btn-" + gifTopic).attr("click-count", 0);
+      }
+    }
+  }
+
+  // --------------------------------------------------------------------------------------
   // pauseImgEffect() toggles between "still" and "animate" data-states
   //
   function pauseImgEffect() {
@@ -39,14 +51,16 @@
   // --------------------------------------------------------------------------------------
   // renderImgs appends the topic related imgs to the dom
   //
-  function renderImgs(data) {
+  function renderImgs(data, nClicks) {
     var figImg,
         figCap,
         img,
         index;
 
-    // clear page of prior images
-    $("#topic-images").empty();
+    // clear page of prior images if it is a 'newly selected' topic
+    if (nClicks <= 1) {
+      $("#topic-images").empty();
+    }
 
     console.log("in renderImgs() -- data: " + data);
     for (index = 0; index < data.length; index++) {
@@ -81,21 +95,36 @@
           figCap.html("<span class=\"rated-pg\">Rating: " + data[index].rating + "</span>");
           break;
         default:
+          figCap.html("<span class=\"rated-none\">No Rating</span>");
           break;
       }
       figImg.append(img);
       figImg.append(figCap);
 
       // append to DOM's "#topic-images"
-      $("#topic-images").append(figImg);
+      $("#topic-images").prepend(figImg);
     }
   }
 
-  // Function for dumping the JSON content for each button into the div
+  // --------------------------------------------------------------------------------------
+  // Function for dumping the JSON content for each button into the div, the click
+  // count for each topic determines at which offset to begin the query.
+  //
   function displayTopicImgs() {
     var topicName = $(this).attr("data-name"),
-        queryURL = GIPHYURL + topicName + GIPHYSUFFIX,
+        topicClicks = parseInt($(this).attr("click-count")),
+        queryURL,
         result;
+
+        queryURL = GIPHYURL + topicName + GIPHYSUFFIX + (topicClicks * GIPHYLIMIT).toString();
+        // increment click count for 'this' topic and update "click-count" accordingly
+        topicsClickCounts[topicName]++;
+        // console.log("Array topicsClickCounts: " + topicsClickCounts[topicName]);
+        $(this).attr("click-count", topicsClickCounts[topicName].toString());
+        // console.log("click-count for " + topicName + " is: " + topicsClickCounts[topicName]);
+
+        // reset other topics' click-count to zero
+        resetOtherClickCounts(topicName);
 
         console.log("in displayTopicImgs() queryURL: " + queryURL);
       $.ajax({
@@ -104,7 +133,7 @@
       }).then((response) => {
         console.log(response);
         result = response.data;
-        renderImgs(result);
+        renderImgs(result, topicsClickCounts[topicName]);
       });
 
   }
@@ -125,6 +154,10 @@
     if (currentTopic !== "") {
       // The topic from the textbox input is added to array
       topicsList.push(currentTopic);
+
+      // initialize click counts to 0, note that the subscript of this array is not
+      // a number but the actual topic
+      topicsClickCounts[currentTopic] = 0;
 
       // Adding new topic to local storage
       localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
