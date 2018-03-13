@@ -200,7 +200,7 @@ $(document).on("click", ".clear-button", () => {
 $(document).on("click", ".clear-favs-button", () => {
   localStorage.removeItem("gifTasticFavorites");
 
-  // manually remove elements from topicsList array
+  // manually remove elements from favList array
   while (favList.length >= 1) {
     favList.pop();
   }
