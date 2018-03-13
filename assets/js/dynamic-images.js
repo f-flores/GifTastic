@@ -8,9 +8,27 @@
 //
 // ******************************************************************************************
 
-
  $(document).ready(() => {
-  console.log("in document ready");
+  // --------------------------------------------------------------------------------------
+  // resetOtherClickCounts() sets unclicked topic names' click count back to zero
+  //
+  function getRatingClass(rating) {
+    var ratingClass = "";
+
+    switch (rating) {
+      case "g":
+        ratingClass = "rated-g";
+        break;
+      case "pg":
+        ratingClass = "rated-pg";
+        break;
+      default:
+        ratingClass = "rated-none";
+        break;
+    }
+
+    return ratingClass;
+  }
 
   // --------------------------------------------------------------------------------------
   // resetOtherClickCounts() sets unclicked topic names' click count back to zero
@@ -28,8 +46,7 @@
   // showFavorites() adds selected image to favorites section
   //
   function showFavorites() {
-    var giphyImgID = $(this).attr("giphy-img-id"),
-        imgTitle = $(this).attr("giphy-title"),
+    var imgTitle = $(this).attr("giphy-title"),
         imgStill = $(this).attr("data-still"),
         imgAnimate = $(this).attr("data-animate"),
         imgRating = $(this).attr("giphy-rating"),
@@ -42,7 +59,6 @@
         ratingClass,
         htmlText;
 
-    console.log("in showFavorites()");
     img.attr("src", imgStill);
     img.attr("alt", imgTitle);
     img.attr("img-state", "still");
@@ -54,18 +70,8 @@
     // set figImg width to img width so img does not have to take up whole row
     figImg.attr("width", imgWidth);
 
-    // add caption to image
-    switch (imgRating) {
-      case "g":
-        ratingClass = "rated-g";
-        break;
-      case "pg":
-        ratingClass = "rated-pg";
-        break;
-      default:
-        ratingClass = "rated-none";
-        break;
-    }
+    // add captions to image
+    ratingClass = getRatingClass(imgRating);
 
     // title of gif image
     if (imgTitle !== "") {
@@ -90,7 +96,6 @@
         queryURL = GIPHYAPIID + giphyImgID + GIPHYAPIIDSUFFIX,
         result;
 
-    console.log("in addToFavorites()");
     // only add 'new' favorites
     if (favList.indexOf(giphyImgID) === -1) {
       console.log("repeat favorite");
@@ -107,9 +112,7 @@
         console.log(result);
         renderFavs(result);
       });
-
     }
-
   }
 
   // --------------------------------------------------------------------------------------
@@ -134,7 +137,9 @@
 
 
   // --------------------------------------------------------------------------------------
-  // renderImgs appends the topic related imgs to the dom
+  // renderImgs appends the topic related imgs to the dom. note that if the user pressses
+  //  the topic button, the offset button is incremented and passed to the GIPHY API, so
+  //  as to render an additional 10 images...
   //
   function renderImgs(data, nClicks) {
     var figImg,
@@ -152,14 +157,12 @@
       $("#topic-images").empty();
     }
 
-    console.log("in renderImgs() -- data: " + data);
     for (index = 0; index < data.length; index++) {
       // create img tag
       figImg = $("<figure>");
       figCapTop = $("<figcaption>");
       figCapBtm = $("<figcaption>");
       img = $("<img>");
-      console.log("Title: " + data[index].title);
 
       // add src and alt attributes to image, and custom attribute img-state
       img.attr("src", data[index].images.fixed_height_still.url);
@@ -172,7 +175,6 @@
 
       // add image id value for favorites section
       img.attr("giphy-id", data[index].id);
-      console.log("image id: " + data[index].id);
 
       // add gif class, which will later enable toggling still and animated state
       // img-fluid leverages bootstrap 4's image responsiveness
@@ -181,35 +183,24 @@
       // set figImg width to img width so img does not have to take up whole row
       figImg.attr("width", data[index].images.fixed_height_still.width);
 
-      // add caption to image
-      switch (data[index].rating) {
-        case "g":
-          ratingClass = "rated-g";
-          break;
-        case "pg":
-          ratingClass = "rated-pg";
-          break;
-        default:
-          ratingClass = "rated-none";
-          break;
-      }
+      // add captions to image
+      ratingClass = getRatingClass(data[index].rating);
+
       // title of gif image
       if (data[index].title !== "") {
         htmlText = "<span class=gif-title>" + data[index].title.toUpperCase() + "</span>";
         figCapTop.html(htmlText);
       }
       htmlText = "";
-      // add an attribute that id's the image via giphy's id, such as still, and an fav-button class
-      // on clicking this class, listen for this.thumbnail image...this-still, and this-animate
-      // later add this image to favorites section... add to the favorite_list array
       htmlText = "<span class=" + ratingClass + ">Rating: " + data[index].rating + "</span>";
       spanFav = $("<span>");
       figFavBtn = $("<button>");
       figFavBtn.addClass("ml-3 fav-button");
+
+      // add an attribute that id's the image via giphy's data object id
       figFavBtn.attr("giphy-img-id", data[index].id);
       figFavBtn.html("Add to &#x2605;");
 
-      // htmlText += "<span><button class=\"ml-3 fav-button\">Add to &#x2605;</button><span>";
       spanFav.append(figFavBtn);
 
       figCapBtm.html(htmlText);
@@ -222,21 +213,20 @@
   }
 
   // --------------------------------------------------------------------------------------
-  // Function for dumping the JSON content for each button into the div, the click
-  // count for each topic determines at which offset to begin the query.
+  // displayTopicImgs() constructs the queryURL, based on the topic and the current offset,
+  //   and makes an .ajax request to the GIPHY API
   //
   function displayTopicImgs() {
     var topicName = $(this).attr("data-name"),
-        topicClicks = parseInt($(this).attr("click-count")),
+        topicClicks = parseInt($(this).attr("click-count"), 10),
         queryURL,
         result;
 
         queryURL = GIPHYURL + topicName + GIPHYSUFFIX + (topicClicks * GIPHYLIMIT).toString();
+
         // increment click count for 'this' topic and update "click-count" accordingly
         topicsClickCounts[topicName]++;
-        // console.log("Array topicsClickCounts: " + topicsClickCounts[topicName]);
         $(this).attr("click-count", topicsClickCounts[topicName].toString());
-        // console.log("click-count for " + topicName + " is: " + topicsClickCounts[topicName]);
 
         // reset other topics' click-count to zero
         resetOtherClickCounts(topicName);
@@ -255,7 +245,7 @@
 
 
   // --------------------------------------------------------------------------------------
-  // handles when a topic is entered in the input text field and submitted
+  // this function is called when a topic is entered in the input text field and submitted
   //
   $("#add-topic-btn").on("click", (event) => {
     var currentTopic;
@@ -263,8 +253,7 @@
     event.preventDefault();
 
     // grabs the input from the topic textbox
-    currentTopic = $("#topic-input").val().
-                    trim();
+    currentTopic = $("#topic-input").val().trim();
 
     // make sure something is entered and not repeat iteam
     if (currentTopic !== "" && topicsList.indexOf(currentTopic) === -1) {
@@ -286,7 +275,7 @@
     $("#topic-input").val("");
   });
 
-
+  // displays the selected topic's giphy images
   $(document).on("click", ".topic", displayTopicImgs);
 
   // $(".gif-image").on("click"..) enables the pausing-gifs effect. It toggles between a "still"
@@ -294,41 +283,14 @@
   $(document).on("click", ".gif-image", pauseImgEffect);
 
   // on clicking a .fav-button class button, the giphy image associated with that button is added
-  // to the favorites section 
+  // to the favorites section
   $(document).on("click", ".fav-button", addToFavorites);
 
-  // on clicking a .fav-button class button, the giphy image associated with that button is added
-  // to the favorites section 
+  // empties out current images in #topic-images
+  $(document).on("click", ".clear-images", () => {
+    $("#topic-images").empty();
+  });
+
+  // displays the thumbnail image in the favorites section in the 'main' gif section
   $(document).on("click", ".show-favorite", showFavorites);
-
-  // clears topic buttons
-  $(document).on("click", ".clear-button", () => {
-    localStorage.removeItem("gifTasticTopics");
-
-    // manually remove elements from topicsList array
-    while (topicsList.length >= 1) {
-      topicsList.pop();
-    }
-
-    localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
-    $(".topic-list").empty();
-    checkLocalStorage();
-    insertButtons();
-  });
-
-  // clears favorite buttons
-  $(document).on("click", ".clear-favs-button", () => {
-    localStorage.removeItem("gifTasticFavorites");
-
-    // manually remove elements from topicsList array
-    while (favList.length >= 1) {
-      favList.pop();
-    }
-
-    localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
-    $("#favorites-list").empty();
-    checkLocalStorage();
-    insertFavorites();
-  });
-
 });

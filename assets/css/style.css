@@ -13,7 +13,6 @@ html body {
     background: linear-gradient(to right, #262220, #5B111F); }
   html body .custom-h1 {
     font-family: "Acme", sans-serif;
-    font-size: 140%;
     /* Positioning */
     margin: 0 auto; }
   html body .custom-h3 {
@@ -25,6 +24,16 @@ html body {
     padding: 10px;
     /* Positioning */
     margin: 0 auto; }
+  html body .rainbow-text {
+    background: yellow;
+    background: -webkit-linear-gradient(left, yellow, orange, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, yellow, orange, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, yellow, orange, green, cyan, blue, violet);
+    background: linear-gradient(to right, yellow, orangered, green, cyan, blue, violet);
+    background-clip: content-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 3.3vw; }
   html body .topic-list {
     /* Box-model */
     margin: 0 auto;
@@ -44,9 +53,9 @@ html body {
     background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
   html body .show-favorite:hover {
-    outline: 2px solid #6593A6; }
+    outline: 4px solid #6593A6; }
   html body .clear-button, html body .clear-favs-button {
-    background: linear-gradient(to right, red, pink);
+    background: linear-gradient(to right, #dd4d4d, pink);
     display: block;
     width: 90%;
     margin: 0 auto;
@@ -63,6 +72,18 @@ html body {
   html body .fav-button:hover {
     background: #5B111F;
     color: white; }
+  html body .clear-images {
+    background: linear-gradient(to right, #ffc579, #fb9d23);
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+    padding: 4px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #5B111F; }
+  html body .clear-images:hover {
+    background: linear-gradient(to right, #ffaf46, #e78404);
+    color: black; }
   html body figure {
     float: left;
     margin: 10px 10px; }
@@ -93,10 +114,20 @@ html body {
     background-color: #F2EDDC; }
   html body #favorites {
     background: linear-gradient(to right, #FFC107, #5B111F); }
+  html body #favorites-list {
+    margin-left: 10px; }
+
+@media only screen and (max-width: 576px) {
+  html body {
+    /*       .custom-h1 {
+        font-size: 220% !important;
+      } */ }
+    html body .rainbow-text {
+      font-size: 12vw; } }
 
 @media only screen and (min-width: 768px) {
-  html body .custom-h1 {
-    font-size: 210% !important; }
+  html body .rainbow-text {
+    font-size: 4vw; }
   html body .custom-h3 {
     text-shadow: none; }
   html body .custom-gradient {

@@ -61,7 +61,7 @@ function renderFavs(imgData) {
   favImg.attr("giphy-id", imgData.id);
   favImg.attr("giphy-title", imgData.title);
   favImg.attr("giphy-rating", imgData.rating);
-  favImg.addClass("show-favorite img-fluid mb-2");
+  favImg.addClass("show-favorite img-fluid mb-2 mr-2");
 
   $("#favorites-list").prepend(favImg);
 
@@ -75,6 +75,7 @@ function insertButtons() {
   // the running GifTastic app
   var rtTopicList = JSON.parse(localStorage.getItem("gifTasticTopics")),
       clearBtn = $("<button>"),
+      clearImgs = $("<button>"),
       tBtn;
 
   // clear prior topics list
@@ -88,20 +89,23 @@ function insertButtons() {
 
   console.log("in insertButtons()");
   clearBtn.addClass("clear-button");
+  clearImgs.addClass("clear-images");
  // clearBtn.addClass("delete-topics");
   clearBtn.text("Clear All Topics");
+  clearImgs.text("Clear Images");
+  clearBtn.addClass("ml-3 mb-2");
+  clearImgs.addClass("ml-3 mb-2");
   // make the gif buttons
   for (const gifTopic of rtTopicList) {
     console.log("current value: " + gifTopic);
     // Dynamically create button for each topic
-    // var xBtn = $("<button class='delete'>").text(&amp;times;).attr("data-index", gifTopic);
     tBtn = $("<button>");
 
     // Adding an id attribute
     tBtn.attr("id", "btn-" + gifTopic);
 
     // Adding a class of topic to button
-    tBtn.addClass("topic topic-button mr-2 mb-2");
+    tBtn.addClass("topic topic-button ml-3 mb-2");
 
     // Adding a data-attribute
     tBtn.attr("data-name", gifTopic);
@@ -118,6 +122,7 @@ function insertButtons() {
     tBtn.text(gifTopic);
     // Adding the button to topic-list section
     $(".topic-list").append(tBtn);
+    $(".topic-list").append(clearImgs);
     $(".topic-list").append(clearBtn);
   }
 }
@@ -175,3 +180,33 @@ function doGiphyAjaxCall(qurl) {
 checkLocalStorage();
 insertButtons();
 insertFavorites();
+
+// clears topic buttons
+$(document).on("click", ".clear-button", () => {
+  localStorage.removeItem("gifTasticTopics");
+
+  // manually remove elements from topicsList array
+  while (topicsList.length >= 1) {
+    topicsList.pop();
+  }
+
+  localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
+  $(".topic-list").empty();
+  checkLocalStorage();
+  insertButtons();
+});
+
+// clears favorite buttons
+$(document).on("click", ".clear-favs-button", () => {
+  localStorage.removeItem("gifTasticFavorites");
+
+  // manually remove elements from topicsList array
+  while (favList.length >= 1) {
+    favList.pop();
+  }
+
+  localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
+  $("#favorites-list").empty();
+  checkLocalStorage();
+  insertFavorites();
+});

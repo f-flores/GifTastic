@@ -31,6 +31,10 @@ $giphy-tbutton-hv-e: #434f55;
 $smph-size: 768;
 $px-smph-size: $smph-size * 1px;
 
+// breakpoint for height: 1px
+$smph-size-b: 576;
+$px-sm-b-size: $smph-size-b * 1px;
+
 
 * {
   box-sizing: border-box;
@@ -47,7 +51,6 @@ html {
     .custom-gradient {
       color: $giphy-tbutton-txt;
       font-size: 6vw;
-      // text-shadow: 0.5px 0.5px white;
     }
 
     .custom-nav-bg {
@@ -56,7 +59,7 @@ html {
 
     .custom-h1 {
       font-family: $giphyapp-font;
-      font-size: 140%;
+      // font-size: 1vh;
 
       /* Positioning */
       margin: 0 auto;
@@ -75,6 +78,18 @@ html {
       margin: 0 auto;
     }
 
+    .rainbow-text {
+      background: yellow;
+      background: -webkit-linear-gradient(left, yellow , orange, green, cyan, blue, violet);
+      background: -o-linear-gradient(right, yellow, orange, green, cyan, blue, violet);
+      background: -moz-linear-gradient(right, yellow, orange, green, cyan, blue, violet);
+      background: linear-gradient(to right, yellow , orangered, green, cyan, blue, violet);
+      background-clip: content-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 3.3vw;
+    }
+
     .topic-list {
       // padding-left: 3%;
 
@@ -85,7 +100,6 @@ html {
     }
 
     .topic-button, .favorite-button {
-      // background-color: $giphy-color-4;
       background: linear-gradient(to right, $giphy-tbutton-s, $giphy-tbutton-e);
       display: block;
       width: 90%;
@@ -104,11 +118,11 @@ html {
     }
 
     .show-favorite:hover {
-      outline: 2px solid $giphy-color-2;
+      outline: 4px solid $giphy-color-2;
     }
 
     .clear-button, .clear-favs-button {
-      background: linear-gradient(to right, red, pink);
+      background: linear-gradient(to right, #dd4d4d, pink);
       display: block;
       width: 90%;
       margin: 0 auto;
@@ -132,6 +146,22 @@ html {
     .fav-button:hover {
       background: $giphy-color-7;
       color: white;
+    }
+
+    .clear-images {
+      background: linear-gradient(to right, #ffc579, #fb9d23); 
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 4px;
+      border-radius: 15px;
+      font-weight: bold;
+      color: $giphy-color-7;
+    }
+
+    .clear-images:hover {
+      background: linear-gradient(to right, #ffaf46, #e78404); 
+      color: black;
     }
 
     figure {
@@ -184,10 +214,11 @@ html {
 
     #favorites {
       background: linear-gradient(to right, $giphy-fav-section, $giphy-color-7);
-      // max-height: 100vh;
     }
 
-
+    #favorites-list {
+      margin-left: 10px;
+    }
 
   }
 
@@ -195,12 +226,30 @@ html {
 
 
 //---------------------------------------------------------------------
+// FONT SIZE for custom-h1 on breakpoint at 576pixels
+@media only screen and (max-width: $px-sm-b-size) {
+  html {
+    body {
+      
+/*       .custom-h1 {
+        font-size: 220% !important;
+      } */
+
+      .rainbow-text {
+        font-size: 12vw;
+      }
+    }
+  }
+}
+
+//---------------------------------------------------------------------
 // FONT SIZE for custom-h1 on breakpoint tablet landscape
 @media only screen and (min-width: $px-smph-size) {
   html {
     body {
-      .custom-h1 {
-        font-size: 210% !important;
+      
+      .rainbow-text {
+        font-size: 4vw;
       }
 
       .custom-h3 {
