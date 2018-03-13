@@ -103,6 +103,10 @@ html {
       color: $giphy-color-6;
     }
 
+    .show-favorite:hover {
+      outline: 2px solid $giphy-color-2;
+    }
+
     .clear-button, .clear-favs-button {
       background: linear-gradient(to right, red, pink);
       display: block;

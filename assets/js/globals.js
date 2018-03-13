@@ -39,6 +39,23 @@ function checkLocalStorage() {
   }
 }
 
+// --------------------------------------------------------------------------------------
+// renderFavs() renders a miniature favorite image in the Favorites section
+//
+function renderFavs(imgData) {
+  var favImg = $("<img>");
+
+  // miniature still gif
+ // if (favList.indexOf(imgData.id) === -1) {
+    favImg.attr("src", imgData.images.fixed_height_small_still.url);
+    favImg.attr("alt", imgData.title);
+    favImg.attr("giphy-img-id", imgData.id);
+    favImg.addClass("show-favorite img-fluid mb-2");
+
+    $("#favorites-list").prepend(favImg);
+//  }
+}
+
 // -------------------------------------------------------------------------------------
 // insertButtons() places images stored in localStorage array in DOM.
 //
@@ -103,10 +120,9 @@ function insertFavorites() {
   // the running GifTastic app
   var rtFavList = JSON.parse(localStorage.getItem("gifTasticFavorites")),
       clearBtn = $("<button>"),
-      queryURL,
-      result;
+      queryURL;
 
-  // clear prior topics list
+  // clear prior favorites list
   $(".favorites-list").empty();
 
   // if no elements are present in rtImageList, it means that the localStorage object

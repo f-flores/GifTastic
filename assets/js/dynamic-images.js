@@ -25,21 +25,6 @@
   }
 
   // --------------------------------------------------------------------------------------
-  // renderFavs() renders a miniature favorite image in the Favorites section
-  //
-  function renderFavs(imgData) {
-    var favImg = $("<img>");
-
-    // miniature still gif
-    favImg.attr("src", imgData.images.fixed_height_small_still.url);
-    favImg.attr("alt", imgData.title);
-    favImg.attr("giphy-img-id", imgData.id);
-    favImg.addClass("show-favorite img-fluid");
-
-    $("#favorites-list").prepend(favImg);
-  }
-
-  // --------------------------------------------------------------------------------------
   // addToFavorites() adds selected image to favorites section
   //
   function addToFavorites() {
@@ -48,18 +33,25 @@
         result;
 
     console.log("in addToFavorites()");
-    favList.push(giphyImgID);
-    localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
+    // only add 'new' favorites
+    if (favList.indexOf(giphyImgID) === -1) {
+      console.log("repeat favorite");
+      favList.push(giphyImgID);
 
-    $.ajax({
-      "method": "GET",
-      "url": queryURL
-    }).then((response) => {
-      // console.log(response);
-      result = response.data;
-      console.log(result);
-      renderFavs(result);
-    });
+      localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
+
+      $.ajax({
+        "method": "GET",
+        "url": queryURL
+      }).then((response) => {
+        // console.log(response);
+        result = response.data;
+        console.log(result);
+        renderFavs(result);
+      });
+
+    }
+
   }
 
   // --------------------------------------------------------------------------------------

@@ -43,6 +43,8 @@ html body {
   html body .topic-button:hover, html body .favorite-button:hover {
     background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
+  html body .show-favorite:hover {
+    outline: 2px solid #6593A6; }
   html body .clear-button, html body .clear-favs-button {
     background: linear-gradient(to right, red, pink);
     display: block;
