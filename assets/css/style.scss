@@ -84,7 +84,7 @@ html {
       border: 1px 1px solid black;
     }
 
-    .topic-button {
+    .topic-button, .favorite-button {
       // background-color: $giphy-color-4;
       background: linear-gradient(to right, $giphy-tbutton-s, $giphy-tbutton-e);
       display: block;
@@ -98,12 +98,12 @@ html {
       text-align: center;
     }
 
-    .topic-button:hover {
+    .topic-button:hover, .favorite-button:hover {
       background: linear-gradient(to right, $giphy-tbutton-hv-s, $giphy-tbutton-hv-e);
       color: $giphy-color-6;
     }
 
-    .clear-button {
+    .clear-button, .clear-favs-button {
       background: linear-gradient(to right, red, pink);
       display: block;
       width: 90%;
@@ -116,9 +116,18 @@ html {
       text-align: center;
     }
 
-    .clear-button:hover {
+    .clear-button:hover, .clear-favs-button:hover {
       background: linear-gradient(to right, #b70135, #c4355d);
       color: black;
+    }
+
+    .fav-button {
+      background: salmon;
+    }
+
+    .fav-button:hover {
+      background: $giphy-color-7;
+      color: white;
     }
 
     figure {
@@ -128,22 +137,25 @@ html {
 
       figcaption {
         font-size: 80%;
-        padding: 3px;
+        padding: 0px 0px;
         border-radius: 5px;
 
         .rated-g {
           background: green;
           color: white;
+          padding: 4px 2px;
         }
 
         .rated-pg {
           background: goldenrod;
           color: black;
+          padding: 4px 2px;
         }
 
-        .rated-none {
+        .rated-none, .gif-title {
           background: black;
           color: white;
+          padding: 4px 2px;
         }
       }
     }

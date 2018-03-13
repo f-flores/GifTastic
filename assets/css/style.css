@@ -30,7 +30,7 @@ html body {
     margin: 0 auto;
     max-width: 100%;
     border: 1px 1px solid black; }
-  html body .topic-button {
+  html body .topic-button, html body .favorite-button {
     background: linear-gradient(to right, #CEDCE7, #596a72);
     display: block;
     width: 90%;
@@ -40,10 +40,10 @@ html body {
     font-weight: bold;
     color: #09113a;
     text-align: center; }
-  html body .topic-button:hover {
+  html body .topic-button:hover, html body .favorite-button:hover {
     background: linear-gradient(to right, #acc4d6, #434f55);
     color: #CAE6F2; }
-  html body .clear-button {
+  html body .clear-button, html body .clear-favs-button {
     background: linear-gradient(to right, red, pink);
     display: block;
     width: 90%;
@@ -53,25 +53,33 @@ html body {
     font-weight: bold;
     color: brown;
     text-align: center; }
-  html body .clear-button:hover {
+  html body .clear-button:hover, html body .clear-favs-button:hover {
     background: linear-gradient(to right, #b70135, #c4355d);
     color: black; }
+  html body .fav-button {
+    background: salmon; }
+  html body .fav-button:hover {
+    background: #5B111F;
+    color: white; }
   html body figure {
     float: left;
     margin: 10px 10px; }
     html body figure figcaption {
       font-size: 80%;
-      padding: 3px;
+      padding: 0px 0px;
       border-radius: 5px; }
       html body figure figcaption .rated-g {
         background: green;
-        color: white; }
+        color: white;
+        padding: 4px 2px; }
       html body figure figcaption .rated-pg {
         background: goldenrod;
-        color: black; }
-      html body figure figcaption .rated-none {
+        color: black;
+        padding: 4px 2px; }
+      html body figure figcaption .rated-none, html body figure figcaption .gif-title {
         background: black;
-        color: white; }
+        color: white;
+        padding: 4px 2px; }
   html body button {
     text-align: center; }
   html body #add-topic {

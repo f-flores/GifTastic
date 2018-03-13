@@ -1,7 +1,8 @@
 // *************************************************************************************
 //
 // File name: globals.js
-// Description: Contains global variables and functions for GifTastic project.
+// Description: Contains global variables and functions for GifTastic project. The
+//   localStorage objects are defined in this file as well.
 //
 // *************************************************************************************
 
@@ -12,6 +13,9 @@ const GIPHYLIMIT = 10,
       GIPHYKEY = "zOxVha9Ha82FHhEMPSbIBvoOOApcLrBK",
       GIPHYURL = "https://api.giphy.com/v1/gifs/search?api_key=" + GIPHYKEY + "&q=",
       GIPHYSUFFIX = "&limit=" + GIPHYLIMIT.toString() + "&rating=PG&lang=en&offset=";
+
+const GIPHYAPIID = "https://api.giphy.com/v1/gifs/",
+      GIPHYAPIIDSUFFIX = "?api_key=" + GIPHYKEY;
 
 // grabs the localStorage object in the *global* topicsList 'array' in parsed format
 var topicsList = JSON.parse(localStorage.getItem("gifTasticTopics")),
@@ -90,5 +94,57 @@ function insertButtons() {
   }
 }
 
+
+// -------------------------------------------------------------------------------------
+// insertFavorites() places favorite images stored in localStorage array in DOM.
+//
+function insertFavorites() {
+  // rtFavList is a variable that represents the realtime favorites image list within
+  // the running GifTastic app
+  var rtFavList = JSON.parse(localStorage.getItem("gifTasticFavorites")),
+      clearBtn = $("<button>"),
+      queryURL,
+      result;
+
+  // clear prior topics list
+  $(".favorites-list").empty();
+
+  // if no elements are present in rtImageList, it means that the localStorage object
+  // gifTasticTopics is empty, so an empty array will be declared
+  if (!Array.isArray(rtFavList)) {
+    rtFavList = [];
+  }
+
+  console.log("in insertFavorites()");
+  clearBtn.addClass("clear-favs-button");
+  // clearBtn.addClass("delete-topics");
+  clearBtn.text("Clear Favorites");
+  // make the gif buttons
+  for (const fImg of rtFavList) {
+    console.log("current value: " + fImg);
+
+    queryURL = GIPHYAPIID + fImg + GIPHYAPIIDSUFFIX;
+
+    doGiphyAjaxCall(queryURL);
+
+  }
+  $("#favorites-list").append(clearBtn);
+}
+
+function doGiphyAjaxCall(qurl) {
+  var result;
+
+  $.ajax({
+    "method": "GET",
+    "url": qurl
+  }).then((response) => {
+    result = response.data;
+    // console.log(result);
+    renderFavs(result);
+  });
+}
+
+
 checkLocalStorage();
 insertButtons();
+insertFavorites();

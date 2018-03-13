@@ -3,8 +3,8 @@
 // File name: dynamic-images.js
 // Author: Fabian Flores
 // Date: March, 2018
-// Description: Implements GifTastic application, dynamicall fills page of giphy images
-//   based on user input.
+// Description: Implements GifTastic application, dynamically fills page with gif images
+//   based on user input. Makes use of the GIPHY API.
 //
 // ******************************************************************************************
 
@@ -22,6 +22,44 @@
         $("#btn-" + gifTopic).attr("click-count", 0);
       }
     }
+  }
+
+  // --------------------------------------------------------------------------------------
+  // renderFavs() renders a miniature favorite image in the Favorites section
+  //
+  function renderFavs(imgData) {
+    var favImg = $("<img>");
+
+    // miniature still gif
+    favImg.attr("src", imgData.images.fixed_height_small_still.url);
+    favImg.attr("alt", imgData.title);
+    favImg.attr("giphy-img-id", imgData.id);
+    favImg.addClass("show-favorite img-fluid");
+
+    $("#favorites-list").prepend(favImg);
+  }
+
+  // --------------------------------------------------------------------------------------
+  // addToFavorites() adds selected image to favorites section
+  //
+  function addToFavorites() {
+    var giphyImgID = $(this).attr("giphy-img-id"),
+        queryURL = GIPHYAPIID + giphyImgID + GIPHYAPIIDSUFFIX,
+        result;
+
+    console.log("in addToFavorites()");
+    favList.push(giphyImgID);
+    localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
+
+    $.ajax({
+      "method": "GET",
+      "url": queryURL
+    }).then((response) => {
+      // console.log(response);
+      result = response.data;
+      console.log(result);
+      renderFavs(result);
+    });
   }
 
   // --------------------------------------------------------------------------------------
@@ -53,8 +91,13 @@
   //
   function renderImgs(data, nClicks) {
     var figImg,
-        figCap,
+        figCapBtm,
+        figCapTop,
+        figFavBtn,
+        spanFav,
         img,
+        ratingClass,
+        htmlText,
         index;
 
     // clear page of prior images if it is a 'newly selected' topic
@@ -66,7 +109,8 @@
     for (index = 0; index < data.length; index++) {
       // create img tag
       figImg = $("<figure>");
-      figCap = $("<figcaption>");
+      figCapTop = $("<figcaption>");
+      figCapBtm = $("<figcaption>");
       img = $("<img>");
       console.log("Title: " + data[index].title);
 
@@ -79,6 +123,10 @@
       img.attr("data-still", data[index].images.fixed_height_still.url);
       img.attr("data-animate", data[index].images.fixed_height.url);
 
+      // add image id value for favorites section
+      img.attr("giphy-id", data[index].id);
+      console.log("image id: " + data[index].id);
+
       // add gif class, which will later enable toggling still and animated state
       // img-fluid leverages bootstrap 4's image responsiveness
       img.addClass("gif-image img-fluid");
@@ -89,17 +137,37 @@
       // add caption to image
       switch (data[index].rating) {
         case "g":
-          figCap.html("<span class=\"rated-g\">Rating: " + data[index].rating + "</span>");
+          ratingClass = "rated-g";
           break;
         case "pg":
-          figCap.html("<span class=\"rated-pg\">Rating: " + data[index].rating + "</span>");
+          ratingClass = "rated-pg";
           break;
         default:
-          figCap.html("<span class=\"rated-none\">Rating: " + data[index].rating + "</span>");
+          ratingClass = "rated-none";
           break;
       }
-      figImg.append(img);
-      figImg.append(figCap);
+      // title of gif image
+      if (data[index].title !== "") {
+        htmlText = "<span class=gif-title>" + data[index].title.toUpperCase() + "</span>";
+        figCapTop.html(htmlText);
+      }
+      htmlText = "";
+      // add an attribute that id's the image via giphy's id, such as still, and an fav-button class
+      // on clicking this class, listen for this.thumbnail image...this-still, and this-animate
+      // later add this image to favorites section... add to the favorite_list array
+      htmlText = "<span class=" + ratingClass + ">Rating: " + data[index].rating + "</span>";
+      spanFav = $("<span>");
+      figFavBtn = $("<button>");
+      figFavBtn.addClass("ml-3 fav-button");
+      figFavBtn.attr("giphy-img-id", data[index].id);
+      figFavBtn.html("Add to &#x2605;");
+
+      // htmlText += "<span><button class=\"ml-3 fav-button\">Add to &#x2605;</button><span>";
+      spanFav.append(figFavBtn);
+
+      figCapBtm.html(htmlText);
+      figCapBtm.append(spanFav);
+      figImg.append(figCapTop, img, figCapBtm);
 
       // append to DOM's "#topic-images"
       $("#topic-images").prepend(figImg);
@@ -178,6 +246,10 @@
   // and "animated" data-state.
   $(document).on("click", ".gif-image", pauseImgEffect);
 
+  // on clicking a .fav-button class button, the giphy image associated with that button is added
+  // to the favorites section 
+  $(document).on("click", ".fav-button", addToFavorites);
+
   // clears topic buttons
   $(document).on("click", ".clear-button", () => {
     localStorage.removeItem("gifTasticTopics");
@@ -186,11 +258,26 @@
     while (topicsList.length >= 1) {
       topicsList.pop();
     }
-    // localStorage.clear();
+
     localStorage.setItem("gifTasticTopics", JSON.stringify(topicsList));
     $(".topic-list").empty();
     checkLocalStorage();
     insertButtons();
+  });
+
+  // clears favorite buttons
+  $(document).on("click", ".clear-favs-button", () => {
+    localStorage.removeItem("gifTasticFavorites");
+
+    // manually remove elements from topicsList array
+    while (favList.length >= 1) {
+      favList.pop();
+    }
+
+    localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
+    $("#favorites-list").empty();
+    checkLocalStorage();
+    insertFavorites();
   });
 
 });
