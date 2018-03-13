@@ -98,7 +98,6 @@
 
     // only add 'new' favorites
     if (favList.indexOf(giphyImgID) === -1) {
-      console.log("repeat favorite");
       favList.push(giphyImgID);
 
       localStorage.setItem("gifTasticFavorites", JSON.stringify(favList));
@@ -231,7 +230,6 @@
         // reset other topics' click-count to zero
         resetOtherClickCounts(topicName);
 
-        console.log("in displayTopicImgs() queryURL: " + queryURL);
       $.ajax({
         "method": "GET",
         "url": queryURL

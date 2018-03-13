@@ -24,8 +24,6 @@ var topicsList = JSON.parse(localStorage.getItem("gifTasticTopics")),
 // an array of object is created to store current giphy app's topic's and click counts
 var topicsClickCounts = [];
 
-//  localStorage.clear();
-
 // -------------------------------------------------------------------------------------
 // checkLocalStorage() checks if gifTasticTopics and gifTasticFavorites exist
 // in localStorage and if they are an array;
@@ -40,13 +38,13 @@ function checkLocalStorage() {
 }
 
 // --------------------------------------------------------------------------------------
-// renderFavs() renders a miniature favorite image in the Favorites section
+// renderFavs() renders a miniature favorite image in the Favorites section and also
+//   adds attributes which will later be used by showFavorites()
 //
 function renderFavs(imgData) {
   var favImg = $("<img>");
 
   // miniature still gif
-
   favImg.attr("src", imgData.images.fixed_height_small_still.url);
   favImg.attr("alt", imgData.title);
   favImg.attr("giphy-img-id", imgData.id);
@@ -90,7 +88,6 @@ function insertButtons() {
   console.log("in insertButtons()");
   clearBtn.addClass("clear-button");
   clearImgs.addClass("clear-images");
- // clearBtn.addClass("delete-topics");
   clearBtn.text("Clear All Topics");
   clearImgs.text("Clear Images");
   clearBtn.addClass("ml-3 mb-2");
@@ -115,10 +112,8 @@ function insertButtons() {
       topicsClickCounts[gifTopic] = 0;
     }
     tBtn.attr("click-count", topicsClickCounts[gifTopic]);
-    console.log("click-count for " + gifTopic + " is: " + topicsClickCounts[gifTopic]);
 
     // Providing the button text
-    // $(".topic-list").prepend(xBtn);
     tBtn.text(gifTopic);
     // Adding the button to topic-list section
     $(".topic-list").append(tBtn);
