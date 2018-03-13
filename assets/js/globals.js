@@ -46,14 +46,25 @@ function renderFavs(imgData) {
   var favImg = $("<img>");
 
   // miniature still gif
- // if (favList.indexOf(imgData.id) === -1) {
-    favImg.attr("src", imgData.images.fixed_height_small_still.url);
-    favImg.attr("alt", imgData.title);
-    favImg.attr("giphy-img-id", imgData.id);
-    favImg.addClass("show-favorite img-fluid mb-2");
 
-    $("#favorites-list").prepend(favImg);
-//  }
+  favImg.attr("src", imgData.images.fixed_height_small_still.url);
+  favImg.attr("alt", imgData.title);
+  favImg.attr("giphy-img-id", imgData.id);
+  favImg.attr("img-state", "still");
+  favImg.attr("img-fixed-width", imgData.images.fixed_height_still.width);
+
+  // add data-still and data-animate attributes to store respective image urls
+  favImg.attr("data-still", imgData.images.fixed_height_still.url);
+  favImg.attr("data-animate", imgData.images.fixed_height.url);
+
+  // add image id value for favorites section
+  favImg.attr("giphy-id", imgData.id);
+  favImg.attr("giphy-title", imgData.title);
+  favImg.attr("giphy-rating", imgData.rating);
+  favImg.addClass("show-favorite img-fluid mb-2");
+
+  $("#favorites-list").prepend(favImg);
+
 }
 
 // -------------------------------------------------------------------------------------

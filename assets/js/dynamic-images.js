@@ -25,6 +25,64 @@
   }
 
   // --------------------------------------------------------------------------------------
+  // showFavorites() adds selected image to favorites section
+  //
+  function showFavorites() {
+    var giphyImgID = $(this).attr("giphy-img-id"),
+        imgTitle = $(this).attr("giphy-title"),
+        imgStill = $(this).attr("data-still"),
+        imgAnimate = $(this).attr("data-animate"),
+        imgRating = $(this).attr("giphy-rating"),
+        imgGId = $(this).attr("giphy-id"),
+        imgWidth = $(this).attr("img-fixed-width"),
+        figImg = $("<figure>"),
+        figCapTop = $("<figcaption>"),
+        figCapBtm = $("<figcaption>"),
+        img = $("<img>"),
+        ratingClass,
+        htmlText;
+
+    console.log("in showFavorites()");
+    img.attr("src", imgStill);
+    img.attr("alt", imgTitle);
+    img.attr("img-state", "still");
+    img.attr("data-still", imgStill);
+    img.attr("data-animate", imgAnimate);
+    img.attr("giphy-id", imgGId);
+    img.addClass("gif-image img-fluid");
+
+    // set figImg width to img width so img does not have to take up whole row
+    figImg.attr("width", imgWidth);
+
+    // add caption to image
+    switch (imgRating) {
+      case "g":
+        ratingClass = "rated-g";
+        break;
+      case "pg":
+        ratingClass = "rated-pg";
+        break;
+      default:
+        ratingClass = "rated-none";
+        break;
+    }
+
+    // title of gif image
+    if (imgTitle !== "") {
+      htmlText = "<span class=gif-title>" + imgTitle.toUpperCase() + "</span>";
+      figCapTop.html(htmlText);
+    }
+    htmlText = "";
+    htmlText = "<span class=" + ratingClass + ">Rating: " + imgRating + "</span>";
+
+    figCapBtm.html(htmlText);
+    figImg.append(figCapTop, img, figCapBtm);
+
+    // append to DOM's "#topic-images"
+    $("#topic-images").prepend(figImg);
+  }
+
+  // --------------------------------------------------------------------------------------
   // addToFavorites() adds selected image to favorites section
   //
   function addToFavorites() {
@@ -62,10 +120,6 @@
         stillURL = $(this).attr("data-still"),
         state = $(this).attr("img-state");
 
-    console.log("Image state: " + state);
-    console.log("Animated URL: " + animatedURL);
-    console.log("Still URL: " + stillURL);
-
     // If data-state equals still, then the animated gif is activated and the "data-state"
     // attribute is switched to "animate". Otherwise, if the "data-state" is set to "animate",
     // the still image reappears, and the "data-state" is switched back to "still."
@@ -77,6 +131,7 @@
       $(this).attr("img-state", "still");
     }
   }
+
 
   // --------------------------------------------------------------------------------------
   // renderImgs appends the topic related imgs to the dom
@@ -241,6 +296,10 @@
   // on clicking a .fav-button class button, the giphy image associated with that button is added
   // to the favorites section 
   $(document).on("click", ".fav-button", addToFavorites);
+
+  // on clicking a .fav-button class button, the giphy image associated with that button is added
+  // to the favorites section 
+  $(document).on("click", ".show-favorite", showFavorites);
 
   // clears topic buttons
   $(document).on("click", ".clear-button", () => {
